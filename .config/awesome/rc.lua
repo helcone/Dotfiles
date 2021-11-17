@@ -101,13 +101,16 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Wallpaper
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-    end
-end
--- }}}
+---[[ Wallpaper
+--if beautiful.wallpaper then
+--    for s = 1, screen.count() do
+--        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+--    end
+--end
+--if beautiful.wallpaper then
+--	gears.wallpaper.maximized(beautiful.wallpaper, 1, true)
+--	gears.wallpaper.fit(beautiful.wallpaper, 2, true)
+--end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu

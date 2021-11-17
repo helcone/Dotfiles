@@ -14,7 +14,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font          = "sans 6"
+theme.font          = "sans 9"
 
 theme.bg_normal     = xrdb.background
 theme.bg_focus      = xrdb.color12
@@ -39,7 +39,7 @@ theme.taglist_fg_occupied = "#164b5d"
 theme.taglist_fg_urgent   = "#ED7572"
 theme.taglist_fg_empty    = "#828282"
 theme.taglist_spacing     = 2
-theme.taglist_font        = "awesomewm 7"
+theme.taglist_font        = "awesomewm 9"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -139,17 +139,17 @@ end
 --]]
 -- Wallpaper to use
 
--- theme.wallpaper = "/usr/share/blackarch/artwork/wallpaper/City_in_blue.png"
--- theme.wallpaper = "/home/user/Pictures/Wallpapers/gamer-anime-wallpapers.jpg"
--- theme.wallpaper = "/home/user/Pictures/Wallpapers/aesthetic-girl-laptop-wallpapers.jpg"
--- theme.wallpaper = "/home/user/Pictures/Wallpapers/hollow-ichigo-4k-wallpapers.jpg"
--- theme.wallpaper = "/home/user/Pictures/Wallpapers/anime3-linux-wallpapers.jpg"
--- ttheme.wallpaper = "/home/user/Pictures/Wallpapers/serial-experiments-lain.jpg"
--- theme.wallpaper = "/home/user/Pictures/Wallpapers/halo-the-master-chief-collection-wallpapers.jpg"
--- theme.wallpaper = "/home/user/Pictures/Wallpapers/Windows-Anime.jpg"
--- theme.wallpaper = "/home/user/Pictures/Wallpapers/Linuxcommands.jpg"
-theme.wallpaper = "/home/user/Pictures/Wallpapers/anime-linux-wallpapers.jpg"
-
+local homeFolder = "/home/user/Pictures/Wallpapers/"
+-- theme.wallpaper = homeFolder .. "gamer-anime-wallpapers.jpg"
+-- theme.wallpaper = homeFolder .. "aesthetic-girl-laptop-wallpapers.jpg"
+-- theme.wallpaper = homeFolder .. "hollow-ichigo-4k-wallpapers.jpg"
+-- theme.wallpaper = homeFolder .. "anime3-linux-wallpapers.jpg"
+-- theme.wallpaper = homeFolder .. serial-experiments-lain.jpg"
+-- theme.wallpaper = homeFolder .. "halo-the-master-chief-collection-wallpapers.jpg"
+-- theme.wallpaper = homeFolder .. "Windows-Anime.jpg"
+-- theme.wallpaper = homeFolder .. "Linuxcommands.jpg"
+-- theme.wallpaper = homeFolder .. "anime-linux-wallpapers.jpg"
+theme.wallpaper = homeFolder .. "4k-elegant-wallpapers.jpg"
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
