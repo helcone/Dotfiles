@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+if [ "$EUID" -ne 0 ];
+then
+	echo "Please run as root"
+	exit
+fi
+
+mount -t cifs -o user=helcone,gid=user,uid=user,forcegid,forceuid //192.168.1.4/helcone /home/user/Shares
+
