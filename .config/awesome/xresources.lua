@@ -14,7 +14,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font          = "sans 9"
+theme.font          = "sans 6"
 
 theme.bg_normal     = xrdb.background
 theme.bg_focus      = xrdb.color12
@@ -39,7 +39,7 @@ theme.taglist_fg_occupied = "#164b5d"
 theme.taglist_fg_urgent   = "#ED7572"
 theme.taglist_fg_empty    = "#828282"
 theme.taglist_spacing     = 2
-theme.taglist_font        = "awesomewm 9"
+theme.taglist_font        = "awesomewm 6"
 
 -- There are other variable sets
 -- overriding the default one when
