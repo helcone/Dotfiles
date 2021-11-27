@@ -38,7 +38,7 @@ xscreensaver &
 mons -a &
 picom -b &
 nm-applet &
-autorandr reading2 &
+#autorandr reading2 &
 #nordvpn connect us &
 #protonvpn-cli c -f &
 #udiskie -As &
