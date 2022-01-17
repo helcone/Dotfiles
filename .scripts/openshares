@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+IP=$1
+share=$2
+
+if [ "$EUID" -ne 0 ];
+then
+	echo "Please run as root"
+	exit
+fi
+
+mount -t cifs -o user=helcone,gid=users,uid=user,forcegid,forceuid //$IP/$share /home/user/Shares
+
