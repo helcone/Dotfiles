@@ -40,18 +40,9 @@ picom -b &
 blueman-applet &
 nm-applet &
 autorandr reading2 &
-#nordvpn connect us &
-#protonvpn-cli c -f &
-#udiskie -As &
-#keepassxc &
 
-#session=$1
-#
-#case $session in
-#    qtile              ) exec qtile start;;
-#    awesome            ) exec awesome;;
-#    # No known session, try to run it as command
-#    *                  ) exec $1;;
-#esac
-exec awesome
-#exec qtile start
+# Awesome wm (lua)
+#exec awesome
+
+# Qtile (python)
+exec qtile start
