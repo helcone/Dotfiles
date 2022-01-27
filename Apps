@@ -2,11 +2,7 @@ adapta-gtk-theme
 adobe-source-sans-fonts
 adobe-source-serif-fonts
 alacritty
-alsa-firmware
-alsa-utils
 amd-ucode
-amdgpu-pro-libgl
-amf-amdgpu-pro
 ani-cli-git
 apulse
 arc-gtk-theme
@@ -97,12 +93,10 @@ imv
 iptables-nft
 iwd
 jdk-openjdk
-joplin
 jre-openjdk
 keepassxc
 kronometer
 legendary
-lib32-amdgpu-pro-libgl
 lib32-gamemode
 lib32-libva-mesa-driver
 lib32-mesa-vdpau
@@ -121,8 +115,6 @@ light
 lightly-qt
 linux-firmware
 linux-steam-integration-git
-linux-xanmod-edge
-linux-xanmod-edge-headers
 lshw
 lsscsi
 lutris
@@ -160,7 +152,6 @@ ntfs-3g
 nvim-packer-git
 obs-studio
 odysee-nativefier
-opencl-amd
 os-prober
 p7zip
 pacman
@@ -172,6 +163,7 @@ pcre-static
 pdftk
 peek
 picom
+pipewire
 pipewire-alsa
 pipewire-pulse
 pkgconf
@@ -225,7 +217,6 @@ silo-office365
 silos
 sleuthkit-java
 sof-firmware
-spotify-tui
 steam-fonts
 steam-native-runtime
 steamos-compositor-plus
@@ -354,7 +345,6 @@ xorg-xwud
 xscreensaver
 xss-lock
 xterm
-yay
 zathura
 zathura-cb
 zathura-djvu
