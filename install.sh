@@ -21,6 +21,13 @@ qimgv="$HomeConfig/qimgv"
 gtk2="$HomeConfig/gtk-2.0"
 gtk3="$HomeConfig/gtk-3.0"
 
+###########################
+## Bash Installation ######
+###########################
+
+ln -s $WorkDir/.bashrc $HOME/.bashrc
+ln -s $WorkDir/.bash_profile $HOME/.bash_profile
+
 echo "Creating Wallpaper Dir"
 
 # Link Wallpapers to git repo 
@@ -34,18 +41,18 @@ echo "Creating Alacritty config"
 
 # Link alacritty 
 
-if [[ -d $alacritty ]]
+if [[ ! -d $alacritty ]]
 then
-	rm -rf $alacritty
+	mkdir -p $alacritty
 fi
 ln -s $ConfigDir/alacritty $alacritty
 
 echo "Creating awesome config"
 # Link awesome 
 
-if [[ -d $awesome  ]]
+if [[ ! -d $awesome  ]]
 then
-	rm -rf $awesome
+	mkdir -p $awesome
 fi
 ln -s $ConfigDir/awesome $awesome
 
@@ -53,9 +60,9 @@ echo "Creating picom config"
 
 # Link  picom 
 
-if [[ -d $picom  ]]
+if [[ ! -d $picom  ]]
 then
-	rm -rf $picom 
+	mkdir -p $picom 
 fi
 ln -s $ConfigDir/picom $picom
 
