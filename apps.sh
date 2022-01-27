@@ -28,6 +28,7 @@ echo 8bfe5a569ba7d3b055077a4e5ceada94119cccef strap.sh | sha1sum -c
 chmod +x strap.sh
 sudo ./strap.sh
 sudo pacman -Syu
+rm -rf strap.sh
 
 ##########################
 ## Install Arch4edu  #####
@@ -43,6 +44,7 @@ cat >> "/etc/pacman.conf" << EOF
 [arch4edu]
 Server = https://arch4edu.keybase.pub/$arch
 EOF
+rm -rf arch4edu-keyring-20200805-2-any.pkg.tar.zst
 
 yay -S --needed - < Apps
 
