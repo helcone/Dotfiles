@@ -25,11 +25,13 @@ fi
 
 ln -sf $WorkDir/Wallpapers $HOME/Pictures/Wallpapers
 
+ln -sf $Workdir/.scripts $HOME/.scripts
+
 for i in $ConfigDir/*;
 do
 	file=$(echo $i | awk -F / '{print $NF}')
 	echo "Creating $file configuration"
-	echo "ln -sf $i $HomeConfig/$file"
+	ln -sf $i $HomeConfig/$file
 done
 
 echo "Configuring Ranger"
@@ -42,3 +44,7 @@ git clone https://github.com/maximtrp/ranger-archives.git $HOME/.config/ranger/p
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 git clone https://github.com/cdump/ranger-devicons2 $HOME/.config/ranger/plugins/devicons2
+
+ln -sf $WorkDir/xranger.desktop $HOME/.local/share/applications/xranger.desktop
+
+xdg-mime default ranger.desktop inode/directory
