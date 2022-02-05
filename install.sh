@@ -22,11 +22,12 @@ if [[ ! -d $HOME/Pictures ]]
 then
 	mkdir -p $HOME/Pictures/
 fi
+
 ln -sf $WorkDir/Wallpapers $HOME/Pictures/Wallpapers
 
 for i in $ConfigDir/*;
 do
 	file=$(echo $i | awk -F / '{print $NF}')
 	echo "Creating $file configuration"
-	echo "ln -sf $i $HomeConfig/$file"
+	ln -sf $i $HomeConfig/$file
 done
