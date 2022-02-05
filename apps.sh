@@ -47,4 +47,3 @@ EOF
 rm -rf arch4edu-keyring-20200805-2-any.pkg.tar.zst
 
 yay -S --needed - < Apps
-
