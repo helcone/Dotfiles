@@ -29,5 +29,16 @@ for i in $ConfigDir/*;
 do
 	file=$(echo $i | awk -F / '{print $NF}')
 	echo "Creating $file configuration"
-	ln -sf $i $HomeConfig/$file
+	echo "ln -sf $i $HomeConfig/$file"
 done
+
+echo "Configuring Ranger"
+cd $HOME/.config/ranger
+git clone https://github.com/SL-RU/ranger_udisk_menu
+git clone https://github.com/yonghie/ranger-gitplug
+cd ranger-gitplug
+make install
+git clone https://github.com/maximtrp/ranger-archives.git $HOME/.config/ranger/plugins
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+git clone https://github.com/cdump/ranger-devicons2 $HOME/.config/ranger/plugins/devicons2
