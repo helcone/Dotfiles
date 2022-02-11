@@ -140,16 +140,7 @@ end
 -- Wallpaper to use
 
 local homeFolder = "/home/user/Pictures/Wallpapers/"
--- theme.wallpaper = homeFolder .. "gamer-anime-wallpapers.jpg"
--- theme.wallpaper = homeFolder .. "aesthetic-girl-laptop-wallpapers.jpg"
--- theme.wallpaper = homeFolder .. "hollow-ichigo-4k-wallpapers.jpg"
--- theme.wallpaper = homeFolder .. "anime3-linux-wallpapers.jpg"
--- theme.wallpaper = homeFolder .. serial-experiments-lain.jpg"
--- theme.wallpaper = homeFolder .. "halo-the-master-chief-collection-wallpapers.jpg"
--- theme.wallpaper = homeFolder .. "Windows-Anime.jpg"
--- theme.wallpaper = homeFolder .. "Linuxcommands.jpg"
--- theme.wallpaper = homeFolder .. "anime-linux-wallpapers.jpg"
-theme.wallpaper = homeFolder .. "4k-elegant-wallpapers.jpg"
+theme.wallpaper = homeFolder .. "mac-os.jpg"
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

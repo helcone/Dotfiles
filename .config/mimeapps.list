@@ -1,0 +1,47 @@
+[Added Associations]
+x-scheme-handler/rdp=org.remmina.Remmina.desktop;
+x-scheme-handler/spice=org.remmina.Remmina.desktop;
+x-scheme-handler/vnc=org.remmina.Remmina.desktop;
+x-scheme-handler/remmina=org.remmina.Remmina.desktop;
+application/x-remmina=org.remmina.Remmina.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-7KW1D1.desktop;
+x-scheme-handler/http=librewolf.desktop;
+x-scheme-handler/https=librewolf.desktop;
+x-scheme-handler/chrome=librewolf.desktop;
+text/html=librewolf.desktop;
+application/x-extension-htm=librewolf.desktop;
+application/x-extension-html=librewolf.desktop;
+application/x-extension-shtml=librewolf.desktop;
+application/xhtml+xml=librewolf.desktop;
+application/x-extension-xhtml=librewolf.desktop;
+application/x-extension-xht=librewolf.desktop;
+text/plain=pluma.desktop;
+application/octet-stream=imv-folder.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=word-o365.desktop;libreoffice-writer.desktop;
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+
+[Default Applications]
+x-scheme-handler/rdp=org.remmina.Remmina.desktop
+x-scheme-handler/spice=org.remmina.Remmina.desktop
+x-scheme-handler/vnc=org.remmina.Remmina.desktop
+x-scheme-handler/remmina=org.remmina.Remmina.desktop
+application/x-remmina=org.remmina.Remmina.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-7KW1D1.desktop
+x-scheme-handler/discord-424004941485572097=discord-424004941485572097.desktop
+x-scheme-handler/http=librewolf.desktop
+x-scheme-handler/https=librewolf.desktop
+x-scheme-handler/chrome=librewolf.desktop
+text/html=librewolf.desktop
+application/x-extension-htm=librewolf.desktop
+application/x-extension-html=librewolf.desktop
+application/x-extension-shtml=librewolf.desktop
+application/xhtml+xml=librewolf.desktop
+application/x-extension-xhtml=librewolf.desktop
+application/x-extension-xht=librewolf.desktop
+x-scheme-handler/msteams=teams.desktop
+inode/file=ranger.desktop
+image/vnd.djvu+multipage=org.pwmt.zathura.desktop
+image/vnd.djvu=org.pwmt.zathura.desktop
+inode/folder=ranger.desktop
+x-scheme-handler/discord-668477264995811338=nuclear.desktop
+x-scheme-handler/discord-455712169795780630=discord-455712169795780630.desktop

@@ -155,7 +155,7 @@ mytextclock:connect_signal("button::press",
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
-j                   awful.button({ modkey }, 1, function(t)
+                    awful.button({ modkey }, 1, function(t)
                                               if client.focus then
                                                   client.focus:move_to_tag(t)
                                               end

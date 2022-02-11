@@ -15,7 +15,7 @@ local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
 local utils = require("awesome-wm-widgets.volume-widget.utils")
 
-
+-- Maybe use  pw-record --list-targets | grep -o -e "sink description=.*" | cut -d \" -f 2 instead?
 local LIST_DEVICES_CMD = [[sh -c "pactl list sinks; pacmd list-sources"]]
 local GET_VOLUME_CMD = 'amixer -D pulse sget Master'
 local INC_VOLUME_CMD = 'amixer -D pulse sset Master 5%+'
