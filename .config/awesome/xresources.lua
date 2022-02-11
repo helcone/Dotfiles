@@ -140,7 +140,7 @@ end
 -- Wallpaper to use
 
 local homeFolder = "/home/user/Pictures/Wallpapers/"
-theme.wallpaper = homeFolder .. "banff-national.jpg"
+theme.wallpaper = homeFolder .. "mac-os.jpg"
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

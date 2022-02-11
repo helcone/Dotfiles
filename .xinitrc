@@ -5,6 +5,7 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
+
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
@@ -40,18 +41,7 @@ picom -b &
 blueman-applet &
 nm-applet &
 autorandr reading2 &
-#nordvpn connect us &
-#protonvpn-cli c -f &
-#udiskie -As &
-#keepassxc &
+easyeffects --gapplication-service &
 
-#session=$1
-#
-#case $session in
-#    qtile              ) exec qtile start;;
-#    awesome            ) exec awesome;;
-#    # No known session, try to run it as command
-#    *                  ) exec $1;;
-#esac
 exec awesome
 #exec qtile start
