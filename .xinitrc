@@ -41,7 +41,9 @@ picom -b &
 blueman-applet &
 nm-applet &
 autorandr reading2 &
-easyeffects --gapplication-service &
+#easyeffects --gapplication-service &
+bauh-tray &
+flatpak run --user com.ulduzsoft.Birdtray &
 
 exec awesome
 #exec qtile start

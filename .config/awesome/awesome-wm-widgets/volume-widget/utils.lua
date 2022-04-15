@@ -34,11 +34,11 @@ function utils.extract_sinks_and_sources(pacmd_output)
             in_source = false
         end
 
-        if string.match(line, 'Source #') then
+        if string.match(line, 'index:') then
             in_device = true
             in_properties = false
             device = {
-                id = line:match('# (%d+)'),
+                id = line:match(': (%d+)'),
                 is_default = string.match(line, '*') ~= nil
             }
             if in_sink then
@@ -48,14 +48,14 @@ function utils.extract_sinks_and_sources(pacmd_output)
             end
         end
 
-        if string.match(line, '^\tProperties:') then
+        if string.match(line, '^\tproperties:') then
             in_device = false
             in_properties = true
             properties = {}
             device['properties'] = properties
         end
 
-        if string.match(line, 'Ports:') then
+        if string.match(line, 'ports:') then
             in_device = false
             in_properties = false
             in_ports = true
@@ -63,7 +63,7 @@ function utils.extract_sinks_and_sources(pacmd_output)
             device['ports'] = ports
         end
 
-        if string.match(line, 'Active Port:') then
+        if string.match(line, 'active port:') then
             in_device = false
             in_properties = false
             in_ports = false

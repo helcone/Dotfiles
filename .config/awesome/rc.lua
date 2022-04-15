@@ -91,7 +91,7 @@ awful.layout.layouts = {
     awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.max,
---    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier,
     --awful.layout.suit.corner.nw,
     awful.layout.suit.floating,
@@ -213,7 +213,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     ---[[Systray
     s.systray = wibox.widget.systray()
-    s.systray.visible = false
+    s.systray.visible = true
     --]]
 
     -- Each screen has its own tag table.
@@ -391,7 +391,7 @@ globalkeys = gears.table.join(
     --Screenshot 
 
     awful.key({ }, "Print", function () 
-    awful.util.spawn("flameshot gui", false) end,
+    awful.util.spawn("flatpak run --user org.flameshot.Flameshot gui", false) end,
 		{description = "screenshot", group = "Applications"}),		
 
     --Tor Browser
@@ -644,15 +644,28 @@ awful.rules.rules = {
      }
     },
 
+      --- Gaming Fullscreen for FSR
+
+      { rule_any = {
+	      instance = {},
+	      class = {
+		      "steam_app_292030",
+		      "steam_app_6060"
+	      },
+	      name = {
+		      "Star Wars Battlefront II",
+		      "The Witcher 3"
+	      },
+      }, properties = { fullscreen = true }},
     -- Floating clients.
     { rule_any = {
         instance = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+	  "gl"
         },
         class = {
-	  "Picture in picture", --To get pip floating
           "Arandr",
           "Blueman-manager",
           "Gpick",
@@ -668,18 +681,26 @@ awful.rules.rules = {
         -- and the name shown there might not match defined rules here.
         name = {
           "Event Tester",  -- xev.
+	  "Picture in picture"
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
           "ConfigManager",  -- Thunderbird's about:config.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
+      }, properties = { floating = true, titlebars_enabled = true }},
+
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
+    { rule_any = {
+	    type = { 
+		    "normal", 
+		    "dialog" 
+	    },
+      }, properties = { titlebars_enabled = true }},
+    -- Set Steam Fullscreens and games
+    --{ rule = {instance = { "steam" }
+    --}, properties = { fullscreen = true }},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
@@ -768,3 +789,4 @@ gears.timer {
        callback = function() collectgarbage() end
 }
 
+awful.spawn.with_shell("aw-qt")
