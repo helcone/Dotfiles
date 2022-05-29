@@ -17,10 +17,10 @@ imap <C-v> <C-r><C-o>+
 
 " Plugins.
 
-call plug#begin('~/.vim/plugged')
-
-" Make sure you use single quotes
-" Paste images plugin.
-Plug 'wancocoding/pi2md'
-
-call plug#end()
+"call plug#begin('~/.vim/plugged')
+"
+"" Make sure you use single quotes
+"" Paste images plugin.
+"Plug 'wancocoding/pi2md'
+"
+"call plug#end()

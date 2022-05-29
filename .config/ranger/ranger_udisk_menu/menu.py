@@ -34,7 +34,8 @@ class ChoosePartition:
         self._read_partitions()
 
     def _read_partitions(self):
-        r = subprocess.check_output(['lsblk', '--all', '--json', '-O'])
+        r = subprocess.check_output(['lsblk', '--all', '--json', '-O', ])
+        r = r.decode().replace('0B,', '\"0B\"')
         self.blkinfo = json.loads(r)
         partn = 0
         for bd in self.blkinfo['blockdevices']:

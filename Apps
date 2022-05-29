@@ -41,11 +41,8 @@ dconf-editor
 deepin-gtk-theme
 deepin-icon-theme
 dhclient
-discord
 dmenu
 dnsmasq
-docker
-docker-compose
 dotconf
 edk2-ovmf
 efibootmgr
@@ -59,7 +56,6 @@ festival-us
 ffmpegthumbnailer
 file
 findutils
-flameshot
 flatpak
 flex
 freerdp
@@ -68,9 +64,7 @@ gawk
 gcc
 geckodriver
 gettext
-gimp
 git
-globalprotect-openconnect
 gnu-netcat
 gpodder
 grep
@@ -143,7 +137,6 @@ networkmanager
 networkmanager-openvpn
 nmap
 ntfs-3g
-obs-studio
 opencl-headers
 opencl-mesa
 os-prober
@@ -153,7 +146,6 @@ patch
 pcre-static
 pcsx2
 pdftk
-peek
 phoneinfoga
 picom
 pipewire-alsa
@@ -192,16 +184,12 @@ signal-desktop
 sleuthkit-java
 sof-firmware
 speech-dispatcher
-steam
 sudo
 swtpm
 system-config-printer
-teamviewer
 testdisk
 texinfo
-thunderbird
 torbrowser-launcher
-transmission-gtk
 treeify
 ttf-caladea
 ttf-carlito
@@ -227,7 +215,6 @@ wine-mono
 wine-nine
 wine-staging
 wireplumber
-wireshark-qt
 wqy-zenhei
 xclip
 xdg-user-dirs
@@ -286,11 +273,9 @@ xorg-xwud
 xscreensaver
 xss-lock
 yay
-zaproxy
 zathura
 zathura-cb
 zathura-djvu
 zathura-pdf-mupdf
 zathura-ps
-zotero
 zsh

@@ -14,7 +14,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font          = "sans 6"
+theme.font          = "UbuntuMono Nerd Fonts 7"
 
 theme.bg_normal     = xrdb.background
 theme.bg_focus      = xrdb.color12
@@ -27,19 +27,19 @@ theme.fg_focus      = theme.bg_normal
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.bg_normal
 
-theme.useless_gap   = dpi(0)
+theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
 theme.border_normal = xrdb.color0
 theme.border_focus  = theme.bg_focus
 theme.border_marked = xrdb.color10
 
 -- Taglists theming 
-theme.taglist_fg_focus    = "#3992af"
-theme.taglist_fg_occupied = "#164b5d"
+theme.taglist_fg_focus    = "#000000"
+theme.taglist_fg_occupied = "#7fc9e2"
 theme.taglist_fg_urgent   = "#ED7572"
 theme.taglist_fg_empty    = "#828282"
-theme.taglist_spacing     = 2
-theme.taglist_font        = "awesomewm 6"
+theme.taglist_spacing     = 4
+theme.taglist_font        = "UbuntuMono Nerd Fonts 15"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -111,7 +111,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 )
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
+local taglist_square_size = dpi(6)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )
@@ -139,8 +139,9 @@ end
 --]]
 -- Wallpaper to use
 
-local homeFolder = "/home/user/Pictures/Wallpapers/"
-theme.wallpaper = homeFolder .. "mac-os.jpg"
+local HOME = os.getenv('HOME')
+local wallpapers = HOME .. "/Pictures/Wallpapers/"
+theme.wallpaper = wallpapers .. "arcane.jpg"
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

@@ -15,7 +15,7 @@ require("awful.autofocus")
 
 local wibox = require("wibox")
 local todo_widget = require("awesome-wm-widgets.todo-widget.todo") -- to do widget declaration
-local volume_widget = require('awesome-wm-widgets.volume-widget.volume') -- volume widget declaration 
+-- local volume_widget = require('awesome-wm-widgets.volume-widget.volume') -- volume widget declaration 
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu") -- lock log out widget
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
@@ -34,6 +34,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+
+-- Add Menu
+local freedesktop = require("freedesktop")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -79,6 +82,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+modkey2 = "Mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -122,10 +126,11 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+-- mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+--                                     { "open terminal", terminal }
+--                                   }
+--                         })
+mymainmenu = freedesktop.menu.build() -- this is an awful.menu
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -217,7 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
     --]]
 
     -- Each screen has its own tag table.
-    awful.tag({ "🐉", "🥷", "🕹", "👾", "🦖", "🎮", "🎧", "🎬", "💻" }, s, awful.layout.layouts[1])
+    awful.tag({ "", "", "" , "", "", "", "", "", "" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -244,12 +249,13 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox wibox same as panel
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, width=1300, stretch=false })
 
     -- Add widgets to the wibox aka panel
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+	    --textboxa = wibox.widget.textbox([text = ""]),
             layout = wibox.layout.fixed.horizontal,
             --mylauncher,
             s.mytaglist,
@@ -259,18 +265,18 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
           --  mykeyboardlayout,
-	    s.systray,
             --wibox.widget.systray(), -- system tray
 	    cpu_widget(),
             ram_widget(),
 --	    todo_widget(), -- to do widget running
 	    net_speed_widget(),
-	    volume_widget(),
+	    s.systray,
             mytextclock,
+            s.mylayoutbox,
 	    logout_menu_widget{
 		onlock = function() awful.spawn.with_shell('xscreensaver-command -lock') end
 	    },
-            s.mylayoutbox,
+
         },
     }
 end)
@@ -321,7 +327,7 @@ globalkeys = gears.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ modkey2,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
@@ -385,7 +391,7 @@ globalkeys = gears.table.join(
     -- Firefox         
 
     awful.key({ modkey },            "b",     function ()
-    awful.util.spawn("librewolf") end, 
+    awful.util.spawn("flatpak run io.gitlab.librewolf-community") end, 
 	      {description = "run libre-wolf", group = "Applications"}),
 
     --Screenshot 
@@ -417,15 +423,20 @@ globalkeys = gears.table.join(
     ---[[ Joplin 
 
     awful.key({ modkey }, "v", function () 
-    awful.util.spawn("alacritty -e joplin") end, 
+    awful.util.spawn(terminal.." -e joplin") end, 
 		{description = "Joplin", group = "Applications"}),		
 
 --]]
     ---[[ Joplin Desktop
 
     awful.key({ modkey, "Shift" }, "v", function () 
-    awful.util.spawn("/home/user/.joplin/Joplin.AppImage  %u") end, 
+    awful.util.spawn("flatpak run net.cozic.joplin_desktop") end, 
 		{description = "Joplin Desktop", group = "Applications"}),		
+
+--	Tabby
+    awful.key({ modkey, "Shift"}, "Return", function ()
+	    awful.util.spawn("/opt/Tabby/tabby --no-sandbox") end,
+	    {description = "Tabby Terminal", group = "Applications"}),
 
 --]]
 	-- Create a new termgrp
@@ -446,8 +457,8 @@ globalkeys = gears.table.join(
 	-- If user focuses on a window of a termgrp, launch a terminal in the same termgrp.
 	-- Otherwise, launch a normal terminal.
 	-- Like tmux new-window
-	awful.key({ modkey, "Shift" }, "Return", function() termgrp.action.spawn() end,
-	{description = "open a terminal", group = "launcher"}),
+ --	awful.key({ modkey, "Shift" }, "Return", function() termgrp.action.spawn() end,
+--	{description = "open a terminal", group = "launcher"}),
 
 ---[[
 	-- awful.key({ modkey }, "e", function() termgrp.action.spawn(app) end,
@@ -491,7 +502,7 @@ globalkeys = gears.table.join(
 	
 --	awful.key({ modkey         }, "ñ", function () brightness_widget:inc() end, {description = "increase brightness", group = "custom"}),
 --	awful.key({ modkey, "Shift"}, "ñ", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
-
+--
 
 -- end personalized keys
 
@@ -789,4 +800,4 @@ gears.timer {
        callback = function() collectgarbage() end
 }
 
-awful.spawn.with_shell("aw-qt")
+-- awful.spawn.with_shell("aw-qt")

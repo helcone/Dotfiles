@@ -15,6 +15,8 @@ then
 	export PS1="[ranger]$PS1";
 fi
 
+export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 export TERM='alacritty'
 export PATH=$PATH:/home/user/.local/bin
 export PATH=$PATH:/home/user/.scripts

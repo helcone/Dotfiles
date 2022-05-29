@@ -3,3 +3,9 @@
 
 # Ignore Wallpapers 
 /Wallpapers/
+
+# Ignore certain scripts
+/.scripts/Bikmanrdp
+
+# Ignore MPV History
+/.config/mpv/watch_later/

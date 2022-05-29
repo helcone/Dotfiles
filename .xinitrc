@@ -39,11 +39,11 @@ xscreensaver &
 mons -a &
 picom -b &
 blueman-applet &
-nm-applet &
-autorandr reading2 &
 #easyeffects --gapplication-service &
+volumeicon &
 bauh-tray &
 flatpak run --user com.ulduzsoft.Birdtray &
+/usr/lib/nordtray/nordtray &
 
 exec awesome
 #exec qtile start
