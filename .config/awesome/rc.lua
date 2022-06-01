@@ -222,7 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
     --]]
 
     -- Each screen has its own tag table.
-    awful.tag({ "", "", "" , "", "", "", "", "", "" }, s, awful.layout.layouts[1])
+    awful.tag({ "₁", "₂", "₃" , "₄", "₅", "₆", "₇", "₈", "₉" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -800,4 +800,4 @@ gears.timer {
        callback = function() collectgarbage() end
 }
 
--- awful.spawn.with_shell("aw-qt")
+awful.spawn.with_shell("aw-qt")
