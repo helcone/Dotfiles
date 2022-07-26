@@ -87,21 +87,21 @@ modkey2 = "Mod1"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    --awful.layout.suit.tile.left,
+    awful.layout.suit.tile.left,
     awful.layout.suit.tile.top,
---    awful.layout.suit.tile.bottom,
---    awful.layout.suit.fair,
---    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max,
+    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier,
-    --awful.layout.suit.corner.nw,
+    awful.layout.suit.magnifier,
+    awful.layout.suit.corner.nw,
     awful.layout.suit.floating,
-    --awful.layout.suit.corner.ne,
-    --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
+    awful.layout.suit.corner.ne,
+    awful.layout.suit.corner.sw,
+    awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -222,7 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
     --]]
 
     -- Each screen has its own tag table.
-    awful.tag({ "₁", "₂", "₃" , "₄", "₅", "₆", "₇", "₈", "₉" }, s, awful.layout.layouts[1])
+    awful.tag({ "₁", "₂", "₃" , "₄", "₅", "₆", "₇", "₈", "₉" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -249,36 +249,48 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox wibox same as panel
-    s.mywibox = awful.wibar({ position = "top", screen = s, width=1300, stretch=false })
+    s.mywibox = awful.wibar({ position = "bottom", screen = s, width=1300, stretch=false })
+    --s.mywiwork = awful.wibar({ position = "left", screen = s, stretch=true})
 
     -- Add widgets to the wibox aka panel
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
-	    --textboxa = wibox.widget.textbox([text = ""]),
+	    --textboxa = wibox.widget.textbox( [text = ""] ),
             layout = wibox.layout.fixed.horizontal,
             --mylauncher,
-            s.mytaglist,
+	    s.mytaglist,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-          --  mykeyboardlayout,
+            --mykeyboardlayout,
             --wibox.widget.systray(), -- system tray
 	    cpu_widget(),
             ram_widget(),
---	    todo_widget(), -- to do widget running
-	    net_speed_widget(),
+            --todo_widget(), -- to do widget running
+	    --net_speed_widget(),
 	    s.systray,
-            mytextclock,
             s.mylayoutbox,
+            mytextclock,
 	    logout_menu_widget{
 		onlock = function() awful.spawn.with_shell('xscreensaver-command -lock') end
 	    },
-
         },
     }
+
+
+--    s.mywiwork:setup {
+--	    layout = wibox.layout.fixed.vertical,
+--	    {
+--	           layout = wibox.layout.fixed.vertical,
+--		    -- Workspaces Taglist
+--		    s.mytaglist,
+--	    },
+--	    {},
+--    }
+
 end)
 -- }}}
 
@@ -437,34 +449,6 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"}, "Return", function ()
 	    awful.util.spawn("/opt/Tabby/tabby --no-sandbox") end,
 	    {description = "Tabby Terminal", group = "Applications"}),
-
---]]
-	-- Create a new termgrp
-	-- Like tmux new-session
-	--awful.key({ modkey,           }, "ñ", function() termgrp.action.create("-p \"create termgroup (don't use following names): \" ") end,
-	--	{description = "Create new trmgrp", group = "trmgroup"}),
-
-	-- Detach a termgrp
-	-- Like tmux detach-client
-	--awful.key({ modkey, "Shift"   }, "ñ", function() termgrp.action.detach("-p \"detach termgroup: \" ") end,
-	--	{description = "Detach a termgrp", group = "trmgroup"}),
-
-	-- Attach a termgrp
-	-- Like tmux attach-session
-	-- awful.key({ modkey, "Ctrl"    }, "ñ", function() termgrp.action.attach("-p \"attach termgroup: \" ") end,
-		-- {description = "Attach a term group", group = "trmgroup"}),
-
-	-- If user focuses on a window of a termgrp, launch a terminal in the same termgrp.
-	-- Otherwise, launch a normal terminal.
-	-- Like tmux new-window
- --	awful.key({ modkey, "Shift" }, "Return", function() termgrp.action.spawn() end,
---	{description = "open a terminal", group = "launcher"}),
-
----[[
-	-- awful.key({ modkey }, "e", function() termgrp.action.spawn(app) end,
- --    {description = "open file manager", group = "launcher"}),
-
---]]
 
     --Calculator
 
@@ -655,26 +639,13 @@ awful.rules.rules = {
      }
     },
 
-      --- Gaming Fullscreen for FSR
-
-      { rule_any = {
-	      instance = {},
-	      class = {
-		      "steam_app_292030",
-		      "steam_app_6060"
-	      },
-	      name = {
-		      "Star Wars Battlefront II",
-		      "The Witcher 3"
-	      },
-      }, properties = { fullscreen = true }},
     -- Floating clients.
     { rule_any = {
         instance = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
-	  "gl"
+	  --"gl" -- mpv
         },
         class = {
           "Arandr",
@@ -686,13 +657,15 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
+	  "Pcsx2",
           "xtightvncviewer"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
         name = {
           "Event Tester",  -- xev.
-	  "Picture in picture"
+	  "Picture in picture",
+	  "Friends List",
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
@@ -709,17 +682,85 @@ awful.rules.rules = {
 		    "dialog" 
 	    },
       }, properties = { titlebars_enabled = true }},
-    -- Set Steam Fullscreens and games
-    --{ rule = {instance = { "steam" }
-    --}, properties = { fullscreen = true }},
+    -- Set librewolf to always map on the tag named "2" on screen 1.
+     { rule_any = { 
+	     instance = {
+	             "Navigator"
+             },
+	     class = {
+		     "librewolf"
+	     },
+     },
+       properties = { tag = "₃" }},
+    -- Set Game Launchers   
+     { rule_any = { 
+	     class = {
+		     "heroic",
+		     "Steam"
+	     },
+       },
+       --- Games on fullscreeen always
+       properties = {  screen = 2, tag = "₈", fullscreen = false }},
+     { rule_any = { 
+	     class = {
+		     "steam_app_0", 
+		     "steam_app_292030",
+		     "steam_app_6060"
+	     },
+       },
+       properties = {  screen = 1, tag = "₈", fullscreen = true }},
+     -- Email Rules
+     --
+     --
+     { rule = { class = "BlueMail" },
+       properties = { screen = 1, tag = "₆", fullscreen = false }},
+     { rule = { instance = "Mail" },
+       properties = { tag = "₆", fullscreen = false }},
+       -- Multimedia
+       --
+     { rule_any = { 
+	     class = { 
+		     "silos-netflix",
+		     "Stremio",
+		     "prime-video-nativefier-c7d9d8",
+		     "FreeTube"
+	     }, 
+     },
+       properties = {  tag = "₄" }},
+       -- Check Meetings
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+     { rule_any = { class = {
+	     		"ringcentral"
+     			}, 
+     		},
+       properties = {  tag = "₉" }},
+       -- Message Apps
+       --
+       --
+     { rule_any = { 
+	     class = {
+		     "whatsapp-desktop-linux",
+		     "ringcentral-community-app",
+		     "Microsoft Teams - Preview",
+		     "whatsdesk",
+		     "TelegramDesktop"
+	     },
+	},
+       properties = {  tag = "₅" }},
+	--- Terminal Apps
+	--
+	--
+     { rule_any = { class = {
+	     		"tabby",
+			"Alacritty"
+     			}, 
+     		},
+       properties = {  tag = "₇" }},
+
 }
 -- }}}
 
--- {{{ Signals
+-- {{{ Signals 
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
@@ -800,4 +841,4 @@ gears.timer {
        callback = function() collectgarbage() end
 }
 
-awful.spawn.with_shell("aw-qt")
+--awful.spawn.with_shell("aw-qt")

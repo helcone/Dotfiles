@@ -38,12 +38,10 @@ xsetroot -cursor_name left_ptr
 xscreensaver &
 mons -a &
 picom -b &
-blueman-applet &
-#easyeffects --gapplication-service &
-volumeicon &
+#blueman-applet &
 bauh-tray &
+#/usr/bin/thunderbird &
 flatpak run --user com.ulduzsoft.Birdtray &
 /usr/lib/nordtray/nordtray &
 
 exec awesome
-#exec qtile start

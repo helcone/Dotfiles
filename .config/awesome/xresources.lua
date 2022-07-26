@@ -28,7 +28,7 @@ theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.bg_normal
 
 theme.useless_gap   = dpi(3)
-theme.border_width  = dpi(2)
+theme.border_width  = dpi(5)
 theme.border_normal = xrdb.color0
 theme.border_focus  = theme.bg_focus
 theme.border_marked = xrdb.color10
@@ -141,7 +141,7 @@ end
 
 local HOME = os.getenv('HOME')
 local wallpapers = HOME .. "/Pictures/Wallpapers/"
-theme.wallpaper = wallpapers .. "arcane.jpg"
+theme.wallpaper = wallpapers .. "ArchlinuxAnimeDark.png"
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
