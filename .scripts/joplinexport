@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+if [[ -d /home/user/Documents/Joplin2Obsidian ]]; then
+	echo "Exporting notes..."
+	joplin export --format raw /home/user/Documents/Joplin2Obsidian
+else
+	mkdir -p /home/user/Documents/Joplin2Obsidian
+fi

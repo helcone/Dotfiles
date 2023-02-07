@@ -1,12 +1,13 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=1.0
 Name=xranger
 GenericName=File Manager
 Comment=Launches the ranger file manager
 # needs full path to bin
-Exec=~/.scripts/open-tui ranger %F
+Exec=/home/user/.scripts/open-tui ranger %F
 Icon=utilities-terminal
-Terminal=false
+Terminal=true
 X-MultipleArgs=false
 Type=Application
 MimeType=inode/directory;

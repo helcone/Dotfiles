@@ -15,38 +15,7 @@ local HOME_DIR = os.getenv("HOME")
 local WIDGET_DIR = HOME_DIR .. '/.config/awesome/awesome-wm-widgets/net-speed-widget/'
 local ICONS_DIR = WIDGET_DIR .. 'icons/'
 
-local net_speed_widget = wibox.widget {
-    {
-        id = 'rx_speed',
-        forced_width = 55,
-        align = 'right',
-        widget = wibox.widget.textbox
-    },
-    {
-        image = ICONS_DIR .. 'down.svg',
-        widget = wibox.widget.imagebox
-    },
-    {
-        image =  ICONS_DIR .. 'up.svg',
-        widget = wibox.widget.imagebox
-    },
-    {
-        id = 'tx_speed',
-        forced_width = 55,
-        align = 'left',
-        widget = wibox.widget.textbox
-    },
-    layout = wibox.layout.fixed.horizontal,
-    set_rx_text = function(self, new_rx_speed)
-        self:get_children_by_id('rx_speed')[1]:set_text(tostring(new_rx_speed))
-    end,
-    set_tx_text = function(self, new_tx_speed)
-        self:get_children_by_id('tx_speed')[1]:set_text(tostring(new_tx_speed))
-    end
-}
-
-local prev_rx = 0
-local prev_tx = 0
+local net_speed_widget = {}
 
 local function convert_to_h(bytes)
     local speed
@@ -88,6 +57,42 @@ local function worker(user_args)
 
     local interface = args.interface or '*'
     local timeout = args.timeout or 1
+    local width = args.width or 55
+
+    net_speed_widget = wibox.widget {
+        {
+            id = 'rx_speed',
+            forced_width = width,
+            align = 'right',
+            widget = wibox.widget.textbox
+        },
+        {
+            image = ICONS_DIR .. 'down.svg',
+            widget = wibox.widget.imagebox
+        },
+        {
+            image =  ICONS_DIR .. 'up.svg',
+            widget = wibox.widget.imagebox
+        },
+        {
+            id = 'tx_speed',
+            forced_width = width,
+            align = 'left',
+            widget = wibox.widget.textbox
+        },
+        layout = wibox.layout.fixed.horizontal,
+        set_rx_text = function(self, new_rx_speed)
+            self:get_children_by_id('rx_speed')[1]:set_text(tostring(new_rx_speed))
+        end,
+        set_tx_text = function(self, new_tx_speed)
+            self:get_children_by_id('tx_speed')[1]:set_text(tostring(new_tx_speed))
+        end
+    }
+
+    -- make sure these are not shared across different worker/widgets (e.g. two monitors)
+    -- otherwise the speed will be randomly split among the worker in each monitor
+    local prev_rx = 0
+    local prev_tx = 0
 
     local update_widget = function(widget, stdout)
 
@@ -96,13 +101,13 @@ local function worker(user_args)
         local cur_rx = 0
         local cur_tx = 0
 
-        for i, _ in ipairs(cur_vals) do
-            if i%2 == 1 then cur_rx = cur_rx + cur_vals[i] end
-            if i%2 == 0 then cur_tx = cur_tx + cur_vals[i] end
+        for i, v in ipairs(cur_vals) do
+            if i%2 == 1 then cur_rx = cur_rx + v end
+            if i%2 == 0 then cur_tx = cur_tx + v end
         end
 
-        local speed_rx = cur_rx - prev_rx
-        local speed_tx = cur_tx - prev_tx
+        local speed_rx = (cur_rx - prev_rx) / timeout
+        local speed_tx = (cur_tx - prev_tx) / timeout
 
         widget:set_rx_text(convert_to_h(speed_rx))
         widget:set_tx_text(convert_to_h(speed_tx))

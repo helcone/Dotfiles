@@ -15,12 +15,12 @@ local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
 local utils = require("awesome-wm-widgets.volume-widget.utils")
 
--- Maybe use  pw-record --list-targets | grep -o -e "sink description=.*" | cut -d \" -f 2 instead?
-local LIST_DEVICES_CMD = [[sh -c "pactl list sinks; pacmd list-sources"]]
-local GET_VOLUME_CMD = 'amixer -D pulse sget Master'
-local INC_VOLUME_CMD = 'amixer -D pulse sset Master 5%+'
-local DEC_VOLUME_CMD = 'amixer -D pulse sset Master 5%-'
-local TOG_VOLUME_CMD = 'amixer -D pulse sset Master toggle'
+
+local LIST_DEVICES_CMD = [[sh -c "pacmd list-sinks; pacmd list-sources"]]
+local function GET_VOLUME_CMD(device) return 'amixer -D ' .. device .. ' sget Master' end
+local function INC_VOLUME_CMD(device, step) return 'amixer -D ' .. device .. ' sset Master ' .. step .. '%+' end
+local function DEC_VOLUME_CMD(device, step) return 'amixer -D ' .. device .. ' sset Master ' .. step .. '%-' end
+local function TOG_VOLUME_CMD(device) return 'amixer -D ' .. device .. ' sset Master toggle' end
 
 
 local widget_types = {
@@ -163,8 +163,11 @@ local function worker(user_args)
 
     local args = user_args or {}
 
+    local mixer_cmd = args.mixer_cmd or 'pavucontrol'
     local widget_type = args.widget_type
     local refresh_rate = args.refresh_rate or 1
+    local step = args.step or 5
+    local device = args.device or 'pulse'
 
     if widget_types[widget_type] == nil then
         volume.widget = widget_types['icon_and_text'].get_widget(args.icon_and_text_args)
@@ -182,16 +185,22 @@ local function worker(user_args)
         widget:set_volume_level(volume_level)
     end
 
-    function volume:inc()
-        spawn.easy_async(INC_VOLUME_CMD, function(stdout) update_graphic(volume.widget, stdout) end)
+    function volume:inc(s)
+        spawn.easy_async(INC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(volume.widget, stdout) end)
     end
 
-    function volume:dec()
-        spawn.easy_async(DEC_VOLUME_CMD, function(stdout) update_graphic(volume.widget, stdout) end)
+    function volume:dec(s)
+        spawn.easy_async(DEC_VOLUME_CMD(device, s or step), function(stdout) update_graphic(volume.widget, stdout) end)
     end
 
     function volume:toggle()
-        spawn.easy_async(TOG_VOLUME_CMD, function(stdout) update_graphic(volume.widget, stdout) end)
+        spawn.easy_async(TOG_VOLUME_CMD(device), function(stdout) update_graphic(volume.widget, stdout) end)
+    end
+
+    function volume:mixer()
+        if mixer_cmd then
+            spawn.easy_async(mixer_cmd)
+        end
     end
 
     volume.widget:buttons(
@@ -206,11 +215,12 @@ local function worker(user_args)
                     end),
                     awful.button({}, 4, function() volume:inc() end),
                     awful.button({}, 5, function() volume:dec() end),
+                    awful.button({}, 2, function() volume:mixer() end),
                     awful.button({}, 1, function() volume:toggle() end)
             )
     )
 
-    watch(GET_VOLUME_CMD, refresh_rate, update_graphic, volume.widget)
+    watch(GET_VOLUME_CMD(device), refresh_rate, update_graphic, volume.widget)
 
     return volume.widget
 end

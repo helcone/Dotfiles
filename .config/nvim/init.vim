@@ -14,3 +14,13 @@ vmap <C-c> "+y
 vmap <C-x> "+c
 vmap <C-v> c<ESC>"+p
 imap <C-v> <C-r><C-o>+
+
+" Plugins.
+
+"call plug#begin('~/.vim/plugged')
+"
+"" Make sure you use single quotes
+"" Paste images plugin.
+"Plug 'wancocoding/pi2md'
+"
+"call plug#end()

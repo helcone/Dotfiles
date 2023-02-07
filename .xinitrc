@@ -46,4 +46,3 @@ easyeffects --gapplication-service &
 
 exec awesome
 #exec qtile start
-
